@@ -1,10 +1,10 @@
-
+import {Button} from "./Button";
 
 type PropsTodoType = {
     title: string
-    task: TaskPropsType[]
+    task: TaskType[]
 }
-export type TaskPropsType = {
+export type TaskType = {
     id: number
     isDone: boolean
     title: string
@@ -15,36 +15,29 @@ export const Todolist = ({title, task}: PropsTodoType) => {
             <h3>{title}</h3>
             <div>
                 <input/>
-                <button>+</button>
+                <Button title={'+'}/>
             </div>
-            <ul>
-                <li>
-                    <input
-                        type="checkbox"
-                        checked={task[0].isDone}
-                    />
-                    <span>{task[0].title}</span>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        checked={task[1].isDone}
-                    />
-                    <span>{task[1].title}</span>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        checked={task[2].isDone}
-                    />
-                    <span>{task[2].title}</span>
-                </li>
-
-            </ul>
+            {task.length === 0 ? (
+                <p>Тасок нет</p>
+            ) : (
+                <ul>
+                    {task.map(el => {
+                        return (
+                            <li key={el.id}>
+                                <input
+                                    type="checkbox"
+                                    checked={el.isDone}
+                                />
+                                <span>{el.title}</span>
+                            </li>
+                        )
+                    })}
+                </ul>
+            )}
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <Button title={'All'}/>
+                <Button title={'Active'}/>
+                <Button title={'Completed'}/>
             </div>
         </div>
     );
