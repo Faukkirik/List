@@ -1,16 +1,18 @@
 import {Button} from "./Button";
+import {FilterTasksType} from "./App";
 
 type PropsTodoType = {
     title: string
     task: TaskType[]
     removeTask: (taskId: number) => void
+    changeTask: (filter: FilterTasksType) => void
 }
 export type TaskType = {
     id: number
     isDone: boolean
     title: string
 }
-export const Todolist = ({title, task, removeTask}: PropsTodoType) => {
+export const Todolist = ({title, task, removeTask, changeTask}: PropsTodoType) => {
     return (
         <div>
             <h3>{title}</h3>
@@ -32,16 +34,30 @@ export const Todolist = ({title, task, removeTask}: PropsTodoType) => {
                                 <span>{el.title}</span>
                                 <Button
                                     title={'X'}
-                                    onClick={()=>{ removeTask(el.id) }}/>
+                                    onClick={() => {
+                                        removeTask(el.id)
+                                    }}/>
                             </li>
                         )
                     })}
                 </ul>
             )}
             <div>
-                <Button title={'All'}/>
-                <Button title={'Active'}/>
-                <Button title={'Completed'}/>
+                <Button
+                    title={'All'}
+                    onClick={() => {
+                        changeTask("all")
+                    }}/>
+                <Button
+                    title={'Active'}
+                    onClick={() => {
+                        changeTask("active")
+                    }}/>
+                <Button
+                    title={'Completed'}
+                    onClick={() => {
+                        changeTask("complete")
+                    }}/>
             </div>
         </div>
     );
