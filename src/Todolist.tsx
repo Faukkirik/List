@@ -28,16 +28,9 @@ export const Todolist = ({title, task, removeTask, changeTask, addTask}: PropsTo
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputText(e.currentTarget.value)
     }
-    const setAllTasksHandler = () => {
-        changeTask("all")
+    const changeFilterTasksHandler = (filter: FilterTasksType) => {
+        changeTask(filter)
     }
-    const setActiveTasksHandler = () => {
-        changeTask("active")
-    }
-    const setCompleteTasksHandler = () => {
-        changeTask("complete")
-    }
-
     return (
         <div>
             <h3>{title}</h3>
@@ -77,13 +70,13 @@ export const Todolist = ({title, task, removeTask, changeTask, addTask}: PropsTo
             <div>
                 <Button
                     title={'All'}
-                    onClick={setAllTasksHandler}/>
+                    onClick={() => changeFilterTasksHandler('all')}/>
                 <Button
                     title={'Active'}
-                    onClick={setActiveTasksHandler}/>
+                    onClick={() => changeFilterTasksHandler('active')}/>
                 <Button
                     title={'Completed'}
-                    onClick={setCompleteTasksHandler}/>
+                    onClick={() => changeFilterTasksHandler('complete')}/>
             </div>
         </div>
     );
