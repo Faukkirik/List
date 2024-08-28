@@ -3,13 +3,14 @@ import {Button} from "./Button";
 type PropsTodoType = {
     title: string
     task: TaskType[]
+    removeTask: (taskId: number) => void
 }
 export type TaskType = {
     id: number
     isDone: boolean
     title: string
 }
-export const Todolist = ({title, task}: PropsTodoType) => {
+export const Todolist = ({title, task, removeTask}: PropsTodoType) => {
     return (
         <div>
             <h3>{title}</h3>
@@ -29,6 +30,9 @@ export const Todolist = ({title, task}: PropsTodoType) => {
                                     checked={el.isDone}
                                 />
                                 <span>{el.title}</span>
+                                <Button
+                                    title={'X'}
+                                    onClick={()=>{ removeTask(el.id) }}/>
                             </li>
                         )
                     })}
